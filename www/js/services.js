@@ -50,8 +50,20 @@ angular.module('starter.services',[])
 	    return q.promise;
 	};
 
+	var readdir = function(path, options){
+		var q= $q.defer();
+		client.readdir(path, options, function(error, entries, stat, entries_stat){
+			if(error){
+				q.reject(error);
+			}
+			q.resolve([entries, stat, entries_stat]);
+		})
+		return q.promise;
+	}
+
     return {
     	authenticate: authenticate,
-    	getAccountInfo: getAccountInfo
+    	getAccountInfo: getAccountInfo,
+    	readdir: readdir
     };
 })

@@ -6,5 +6,11 @@
     <h1>Browse</h1>
     <p>{{accountName}}</p>
     <p>{{list}}</p>
+    <ul>
+    	<cg-folder ng-repeat = "entry in entries" ng-if="entries_stat[$index].isFolder" on-click="readdir(entries_stat[$index].path)" fname="entry" icon="entries_stat[$index].typeIcon" path="entries_stat[$index].path"></cg-folder>
+    	<cg-file ng-repeat = "entry in entries" ng-if="entries_stat[$index].isFile" fname="entry" icon="entries_stat[$index].typeIcon" size="entries_stat[$index].humanSize" modified-at="entries_stat[$index].modifiedAt"></cg-file>
+    </ul>
+    
   </ion-content>
+
 </ion-view>

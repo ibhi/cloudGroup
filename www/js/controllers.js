@@ -124,34 +124,35 @@ angular.module('starter.controllers', [])
       },function(error){
         console.log(error);
       });
-       
-      client.readdir("/", function(error, entries) {
-      if (error) {
-        console.log(error);
-        return ;  // Something went wrong.
-      }
-      $scope.$apply(function(){
-        $scope.list = entries.join(", ");
-      })
-      // alert("Your Dropbox contains " + entries.join(", "));
-      });
 
-      // $scope.$watch('accountName' , function(newValue, oldValue){
-      //     if(newValue != null){
-      //       $scope.accountName = newValue;
-      //       console.log(newValue);
-      //     }
+      // clientSrvc.readdir("/").then(function(array){
+      //   $scope.entries = array[0];
+      //   $scope.stat = array[1];
+      //   console.log($scope.stat);
+      //   $scope.entries_stat = array[2];
+      //   console.log($scope.entries_stat);
+      // }, function(error){
+      //   console.log(error);
       // });
-      $scope.$watch('list' , function(newValue, oldValue){
-          if(newValue != null){
-            $scope.list = newValue;
-            console.log(newValue);
-          }
-      });
-
+      $scope.readdir('/');
+       
+      
     }, function(error){
       console.log(error);
-    });
+    }
+  );
+
+  $scope.readdir = function(path){
+    clientSrvc.readdir(path).then(function(array){
+        $scope.entries = array[0];
+        $scope.stat = array[1];
+        console.log($scope.stat);
+        $scope.entries_stat = array[2];
+        console.log($scope.entries_stat);
+      }, function(error){
+        console.log(error);
+      });
+  }
    
   
 });
